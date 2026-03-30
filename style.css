@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAFSA Case Study Portfolio</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .case-section {
+      padding: 60px 0;
+    }
+    .case-section:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    .case-image {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .caption {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+    .hero {
+      background-color: #007bff;
+      color: white;
+      padding: 80px 0;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+    .back-button {
+      margin: 40px 0;
+    }
+    /* Before/After Slider */
+    .ba-container {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .ba-container img {
+      display: block;
+      width: 100%;
+    }
+    .ba-resize {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      overflow: hidden;
+      height: 100%;
+    }
+    .ba-resize img {
+      width: 200%;
+      transform: translateX(-0%);
+    }
+    .ba-slider {
+      position: absolute;
+      z-index: 10;
+      cursor: ew-resize;
+      width: 4px;
+      height: 100%;
+      background: #007bff;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero text-center">
+    <div class="container">
+      <h1>FAFSA Application Experience Redesign</h1>
+      <p>Simplifying a complex financial aid process to reduce student confusion and errors</p>
+      <p><strong>Role:</strong> UX Designer | <strong>Tools:</strong> Figma, Miro | <strong>Duration:</strong> X weeks</p>
+      <a href="index.html" class="btn btn-light mt-3">← Back to Home</a>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="case-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2 class="section-title">Problem</h2>
+          <p>Students struggle to complete FAFSA due to confusing language, overwhelming steps, and lack of guidance. Many users make mistakes or abandon the process entirely due to frustration.</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="images/fafsa-current.png" alt="Current FAFSA screenshot" class="case-image">
+          <p class="caption">Existing FAFSA experience—overwhelming and confusing for students</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section class="case-section">
+    <div class="container">
+      <div class="row align-items-center flex-md-row-reverse">
+        <div class="col-md-6">
+          <h2 class="section-title">Research</h2>
+          <p>I explored how students experience FAFSA through user interviews, flow analysis, and identifying pain points.</p>
+          <ul>
+            <li>Students feel overwhelmed by the amount of information</li>
+            <li>Financial terms are confusing</li>
+            <li>Users fear making mistakes</li>
+            <li>There is little guidance throughout the process</li>
+          </ul>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="images/fafsa-research.png" alt="Research insights" class="case-image">
+          <p class="caption">Key insights visualized</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UX Methods Section (Tabbed) -->
+  <section class="case-section">
+    <div class="container">
+      <h2 class="section-title text-center">UX Methods & Information Architecture</h2>
+
+      <!-- Tabs -->
+      <ul class="nav nav-tabs mt-4" id="uxTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button">Content Inventory</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="cardsort-tab" data-bs-toggle="tab" data-bs-target="#cardsort" type="button">Card Sorting</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="sitemap-tab" data-bs-toggle="tab" data-bs-target="#sitemap" type="button">Sitemap</button>
+        </li>
+      </ul>
+
+      <!-- Tab Contents -->
+      <div class="tab-content mt-4">
+        <div class="tab-pane fade show active" id="inventory" role="tabpanel">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p>Mapped all existing content to understand scope and identify redundancy.</p>
+              <p class="caption">Spreadsheet of all FAFSA pages</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="images/content-inventory.png" alt="Content Inventory" class="case-image">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="cardsort" role="tabpanel">
+          <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-6">
+              <p>Explored how users naturally group FAFSA information to improve navigation.</p>
+              <p class="caption">Miro card sorting results</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="images/card-sorting.png" alt="Card Sorting" class="case-image">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="sitemap" role="tabpanel">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p>Created a simplified sitemap with logical flow and fewer categories based on research insights.</p>
+              <p class="caption">Redesigned FAFSA sitemap</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="images/sitemap.png" alt="Sitemap" class="case-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wireframes Section -->
+  <section class="case-section">
+    <div class="container">
+      <h2 class="section-title text-center">Wireframes</h2>
+      <div class="row mt-4">
+        <div class="col-md-6 text-center">
+          <img src="images/wireframe1.png" alt="Wireframe step 1" class="case-image">
+          <p class="caption">Step-by-step guided flow wireframe</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="images/wireframe2.png" alt="Wireframe step 2" class="case-image">
+          <p class="caption">Clear progress indicators and form layout</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before/After Slider Section -->
+  <section class="case-section">
+    <div class="container">
+      <h2 class="section-title text-center">Before & After</h2>
+      <div class="ba-container mt-4">
+        <img src="images/fafsa-before.png" alt="Before" class="case-image">
+        <div class="ba-resize">
+          <img src="images/fafsa-after.png" alt="After" class="case-image">
+        </div>
+        <div class="ba-slider"></div>
+      </div>
+      <p class="caption text-center mt-2">Drag the slider to compare before and after screens</p>
+    </div>
+  </section>
+
+  <!-- Outcome & Reflection Section -->
+  <section class="case-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2 class="section-title">Outcome</h2>
+          <ul>
+            <li>Reduced user confusion</li>
+            <li>Increased completion rates</li>
+            <li>Improved confidence in completing the application</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h2 class="section-title">Reflection</h2>
+          <p>This project reinforced the importance of clarity, guidance, and structured flows in complex systems. Even small adjustments in content and layout significantly improve user experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Home Button -->
+  <div class="text-center back-button">
+    <a href="index.html" class="btn btn-primary">← Back to Home</a>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Before/After Slider Script -->
+  <script>
+    const slider = document.querySelector('.ba-slider');
+    const resize = document.querySelector('.ba-resize');
+    const container = document.querySelector('.ba-container');
+
+    let isDragging = false;
+
+    slider.addEventListener('mousedown', () => isDragging = true);
+    slider.addEventListener('mouseup', () => isDragging = false);
+    slider.addEventListener('mouseleave', () => isDragging = false);
+    container.addEventListener('mousemove', (e) => {
+      if(!isDragging) return;
+      const rect = container.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      if(x < 0) x = 0;
+      if(x > rect.width) x = rect.width;
+      slider.style.left = x + 'px';
+      resize.style.width = x + 'px';
+    });
+  </script>
+
+</body>
+</html>
+
+<!-- NAVBAR -->
+<nav class="navbar fixed-top">
+  <div class="container">
+    <span class="fw-semibold">FAFSA UX</span>
+    <a href="index.html" class="btn btn-sm btn-outline-dark rounded-pill">Back</a>
+  </div>
+</nav>
+
+.navbar {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.8);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}

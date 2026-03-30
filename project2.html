@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusMotion UX Case Study</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-light: #FDE9C4;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #7c6cff;
+      --primary-dark: #5f4eea;
+      --shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+      --shadow-hover: 0 18px 45px rgba(17, 24, 39, 0.12);
+      --radius: 22px;
+      --container: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #fff4e0;
+    }
+
+    h1, h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    .container {
+      max-width: var(--container);
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+  position: sticky;    /* make it sticky */
+  top: 0;              /* stick to the top */
+  z-index: 999;        /* stay above other content */
+  background: #fff4e0; /* keep background same */
+  padding: 12px 0;
+  margin-bottom: 0;
+}
+
+    .custom-navbar {
+      background: #fff4e0;
+      padding: 12px 0;
+    }
+
+    .nav-wrap {
+      width: 100%;
+      max-width: 1215px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ================= HERO ================= */
+    .hero-clean {
+      background: #fff4e0;
+      padding: 60px 0 40px;
+    }
+
+    .hero-clean .container {
+      max-width: 1000px;
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      color: #777;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+    }
+
+    .hero-left {
+      border-right: 1px solid #ddd;
+      padding-right: 25px;
+    }
+
+    .meta-block {
+      margin-bottom: 22px;
+    }
+
+    .meta-block span {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: #999;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .meta-block p {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .hero-right {
+      padding-left: 10px;
+    }
+
+    .content-block {
+      margin-bottom: 30px;
+    }
+
+    .content-block h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .content-block p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    
+
+    /* ================= CASE / ROLE SECTIONS ================= */
+    .case-section,
+    .role-section,
+    .prototype-section {
+      padding: 60px 0;
+      background-color: #fff4e0;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #9ca3af;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .case-section p {
+      font-size: 0.96rem;
+      color: #4b5563;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* GLOBAL CONTAINER ALIGNMENT */
+.container {
+  max-width: 1000px;
+}
+
+    /* ================= TIMELINE ================= */
+    .timeline-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .timeline-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease;
+      box-shadow: var(--shadow);
+      min-height: 210px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124, 108, 255, 0.05), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-item:hover::before {
+      opacity: 1;
+    }
+
+    .icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s ease;
+    }
+
+    .icon-wrapper img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .timeline-item:hover .icon-wrapper {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .icon-wrapper.ux { background: rgba(255, 107, 107, 0.12); }
+    .icon-wrapper.interaction { background: rgba(77, 171, 247, 0.12); }
+    .icon-wrapper.ui { background: rgba(107, 175, 255, 0.12); }
+    .icon-wrapper.team { background: rgba(99, 230, 190, 0.12); }
+    .icon-wrapper.prototype { background: rgba(252, 191, 73, 0.14); }
+
+    .timeline-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .timeline-item p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ================= CAROUSEL ================= */
+    .carousel-shell {
+      margin-top: 32px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .carousel-item .row {
+      row-gap: 20px;
+    }
+
+    .ui-shot {
+      background: #ffffff;
+      border: 1px solid #eef2f7;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .ui-shot img {
+      width: 75%;
+      max-width: 320px;
+      margin: 0 auto;
+      display: block;
+      border-radius: 14px;
+    }
+
+    .ui-caption {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(1);
+      background-color: rgba(17, 24, 39, 0.65);
+      border-radius: 50%;
+      padding: 16px;
+      background-size: 55%;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 6%;
+    }
+
+    /* ================= PROTOTYPE ================= */
+    .prototype-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .prototype-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .prototype-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .prototype-header p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .prototype-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+    }
+
+    .prototype-frame iframe {
+      width: 100%;
+      height: 620px;
+      border: none;
+      display: block;
+    }
+
+    .prototype-cta {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn-prototype {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-prototype:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(124, 108, 255, 0.22);
+    }
+
+    /* ================= FEATURES ================= */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .feature-list li {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      color: #4b5563;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .feature-list strong {
+      color: #111827;
+    }
+
+    /* ================= REFLECTION ================= */
+    .reflection-wrap p {
+      color: #4b5563;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 0;
+      padding: 80px 20px;
+      background: #111827;
+      color: #fff;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1.5fr;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    .footer-left {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-title {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      text-decoration: none;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background: #9381ff;
+      transition: width 0.35s ease;
+    }
+
+    .footer-column a:hover {
+      color: #9381ff;
+    }
+
+    .footer-column a:hover::after {
+      width: 30%;
+    }
+
+    .footer-cta h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-cta p {
+      font-size: 14px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .footer-btn {
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-btn:hover {
+      background: #fff;
+      color: #111827;
+      transform: translateY(-3px);
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1200px) {
+      .timeline-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 18px; }
+      .timeline-cards { grid-template-columns: repeat(2, 1fr); }
+      .two-col-grid, .feature-list { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .case-section, .role-section, .prototype-section { padding: 55px 0; }
+      .timeline-cards { grid-template-columns: 1fr; }
+      .prototype-frame iframe { height: 500px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .info-card, .prototype-card { padding: 20px; }
+      .carousel-shell { padding: 14px; }
+      .prototype-frame iframe { height: 420px; }
+      .nav-wrap { padding: 0 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+<nav class="navbar custom-navbar">
+  <div class="nav-wrap">
+   <a href="index.html" class="navbar-brand fw-semibold">
+  <img src="logo.png" alt="Logo" height="44">
+</a>
+   <a href="work.html" class="btn btn-outline-dark rounded-pill px-3">Back to Work</a>
+  </div>
+</nav>
+
+  <!-- HERO -->
+  <section class="hero-clean">
+    <div class="container">
+      <h1 class="hero-title">Focus Motion</h1>
+      <p class="hero-sub">UI/UX App Design ✦ 2026</p>
+
+      <div class="hero-grid">
+        <!-- LEFT META -->
+        <div class="hero-left">
+          <div class="meta-block">
+            <span>Role</span>
+            <p>UI/UX Designer</p>
+          </div>
+
+          <div class="meta-block">
+            <span>Timeline</span>
+            <p>4 Weeks</p>
+          </div>
+
+          <div class="meta-block">
+            <span>Tools</span>
+            <p>Figma, Axure</p>
+          </div>
+
+          <div class="meta-block">
+            <span>Focus</span>
+            <p>UX Research, Interaction Design, Prototyping</p>
+          </div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="hero-right">
+          <div class="content-block">
+            <h3>Project Overview</h3>
+            <p>
+              FocusMotion reimagines fitness by embedding physical activity into everyday travel. Instead of treating exercise as a separate task, the app encourages walking, healthier routes, and awareness of movement. I collaborated with my team on designing the interface, refining interactions, and ensuring a seamless experience across both mobile and smartwatch platforms.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h3>Impact</h3>
+            <p>
+              Helped users see and track their daily movement, promoting healthier commuting habits and raising awareness of activity levels through engaging, habit-forming experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROBLEM -->
+<section class="case-section">
+  <div class="container">
+    <h2 class="section-title">Problem</h2>
+    <p>
+      Many students and young commuters struggle to stay active during busy routines because exercise often feels disconnected from daily life. Traditional fitness apps demand extra time and effort, which leads to low engagement and inconsistent habits.
+    </p>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="case-section">
+  <div class="container">
+    <h2 class="section-title">Solution</h2>
+    <p>
+      FocusMotion integrates movement into everyday commuting by suggesting active routes, micro wellness goals, and seamless mobile + smartwatch tracking. The experience makes physical activity feel natural, accessible, and sustainable rather than like a separate task.
+    </p>
+  </div>
+</section>
+
+  <!-- ROLE -->
+  <section class="role-section">
+    <div class="container text-center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">My Role & Contributions</h2>
+      <p class="section-intro">From research to final prototype — my end-to-end design process.</p>
+
+      <div class="timeline-cards">
+        <div class="timeline-item">
+          <div class="icon-wrapper ux">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="UX Research Icon">
+          </div>
+          <h4>UX Research</h4>
+          <p>Conducted interviews and surveys to uncover user pain points and motivations.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-wrapper interaction">
+            <img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png" alt="Interaction Design Icon">
+          </div>
+          <h4>Interaction Design</h4>
+          <p>Mapped flows, built wireframes, and designed intuitive interactions.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-wrapper ui">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="UI Design Icon">
+          </div>
+          <h4>UI Design</h4>
+          <p>Crafted a clean, accessible interface with strong visual consistency.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-wrapper team">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="Collaboration Icon">
+          </div>
+          <h4>Collaboration</h4>
+          <p>Worked closely with teammates on branding, testing, and iteration.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-wrapper prototype">
+            <img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png" alt="Prototype Icon">
+          </div>
+          <h4>Final Prototype</h4>
+          <p>Delivered a polished, interactive prototype for mobile and smartwatch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN HIGHLIGHTS -->
+  <section class="case-section alt text-center">
+    <div class="container">
+      <div class="section-label">Showcase</div>
+      <h2 class="section-title">Design Highlights</h2>
+      <p class="section-intro">
+        Screens from the product experience showcasing the core interface and responsive design system.
+      </p>
+
+      <div class="carousel-shell">
+        <div id="focusCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="ui-shot">
+                    <img src="homepage.png" class="img-fluid" alt="Homepage screen">
+                    <p class="ui-caption">Homepage - Clear entry point with guided onboarding and distraction-free navigation</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="ui-shot">
+                    <img src="progress.png" class="img-fluid" alt="Gallery screen">
+                    <p class="ui-caption">Progress tracking - Visual feedback to motivate consistency and user engagement</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="ui-shot">
+                    <img src="mtrip.png" class="img-fluid" alt="Detail screen">
+                    <p class="ui-caption">Quick Trip - Streamlined interaction for fast, goal-oriented actions</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="ui-shot">
+                    <img src="wtrip.png" class="img-fluid" alt="Responsive views">
+                    <p class="ui-caption">Cross-device experience - Seamless continuity between mobile and wearable interfaces</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#focusCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button class="carousel-control-next" type="button" data-bs-target="#focusCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROTOTYPE -->
+  <section class="prototype-section">
+    <div class="container">
+      <div class="prototype-card">
+        <div class="prototype-header">
+          <div class="section-label">Prototype</div>
+          <h2>Interactive Experience</h2>
+          <p>Explore the full mobile and smartwatch journey designed for FocusMotion through the live prototype.</p>
+        </div>
+
+        <div class="prototype-frame">
+          <iframe
+            src="https://focusmotion.figma.site/"
+            allowfullscreen
+            title="FocusMotion Prototype"
+          ></iframe>
+        </div>
+
+        <div class="prototype-cta">
+          <a href="https://focusmotion.figma.site/" target="_blank" class="btn-prototype">View Full Prototype</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="case-section alt">
+    <div class="container">
+      <div class="section-label">Highlights</div>
+      <h2 class="section-title">Key Features</h2>
+
+      <ul class="feature-list">
+        <li><strong>Smart Route Suggestions:</strong> Encourages walking, running, or cycling through healthier commute options.</li>
+        <li><strong>Micro Wellness Goals:</strong> Small, actionable tasks designed to fit into everyday routines.</li>
+        <li><strong>Mobile + Watch Integration:</strong> A seamless cross-device experience for tracking on the go.</li>
+        <li><strong>Progress Tracking & Rewards:</strong> Visual motivation and lightweight gamification to sustain habits.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="case-section">
+    <div class="container">
+      <div class="reflection-wrap">
+        <div class="section-label">Reflection</div>
+        <h2 class="section-title">What I Learned</h2>
+        <p>
+          This project reinforced the importance of designing for habit formation and integrating wellness into daily life. I learned how to translate research into actionable UX solutions while balancing simplicity, motivation, and functionality.
+        </p>
+        <p>
+          Designing for both mobile and smartwatch platforms taught me to prioritize context-aware experiences and maintain strong visual and interaction consistency across devices. Collaborating on branding, prototyping, and user testing also strengthened my communication and teamwork skills throughout the process.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <!-- NAME -->
+    <div class="footer-left">
+      Divya Manjunathan
+    </div>
+
+    <!-- SITE -->
+    <div class="footer-column">
+      <div class="footer-title">Site</div>
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="footer-column">
+      <div class="footer-title">Social</div>
+      <a href="mailto:divyamanjunathan04@email.com">Email</a>
+      <a href="#">LinkedIn</a>
+    </div>
+
+    <!-- CONTACT CTA -->
+    <div class="footer-cta">
+      <div class="footer-title">Connect</div>
+      <h3>Let’s work together</h3>
+      <p>Have a project, opportunity, or just want to connect?</p>
+      <a href="mailto:divyamanjunathan04@email.com" class="footer-btn">Contact Me</a>
+    </div>
+
+  </div>
+</footer>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

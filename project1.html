@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAFSA UX Case Study</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.navbar {
+  position: sticky;    /* make it sticky */
+  top: 0;              /* stick to the top */
+  z-index: 999;        /* stay above other content */
+  background: #eaf2ff; /* keep background same */
+  padding: 12px 0;
+  margin-bottom: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  line-height: 1.6;
+   margin: 0;
+  padding: 0;
+  background-color: #eaf2ff;
+}
+
+.case-section {
+  padding: 60px 0;
+}
+
+.case-section:nth-child(even) {
+  background: #eaf2ff;
+}
+
+.case-section:nth-child(odd) {
+  background: #eaf2ff;
+}
+
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* HERO */
+.hero-clean {
+  background: #eaf2ff;
+  padding: 60px 0 40px; /* clean + tighter */
+}
+
+/* CENTER CONTAINER MORE */
+.hero-clean .container {
+  max-width: 1000px;
+}
+
+/* TITLE */
+.hero-title {
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.hero-sub {
+  color: #777;
+  font-size: 1rem;
+  margin-bottom: 40px; /* tighter */
+}
+
+/* GRID */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr; /* reduced left width */
+  gap: 40px; /* tighter gap */
+}
+
+/* LEFT SIDE */
+.hero-left {
+  border-right: 1px solid #ddd;
+  padding-right: 25px; /* reduced */
+}
+
+.meta-block {
+  margin-bottom: 22px;
+}
+
+.meta-block span {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: #999;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.meta-block p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* RIGHT SIDE */
+.hero-right {
+  padding-left: 10px; /* reduced */
+}
+
+.content-block {
+  margin-bottom: 30px;
+}
+
+.content-block h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.content-block p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+
+/* GLOBAL CONTAINER ALIGNMENT */
+.container {
+  max-width: 1000px;
+}
+
+
+/* FULL WIDTH IMAGE */
+.full-image {
+  width: 100%;
+  overflow: hidden;
+  margin: 40px 0 60px;
+
+}
+
+.full-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ALL OTHER SECTIONS ALIGN WITH HERO */
+.case-section {
+  padding: 80px 0;
+}
+
+.case-section .container {
+  max-width: 1000px;
+}
+
+/* CARD BASE */
+.card-clean {
+  background: #fff;
+  border-radius: 14px;
+  padding: 25px;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+/* HOVER EFFECT (subtle, premium) */
+.card-clean:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* TEXT */
+.card-clean h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-clean p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* GOALS (more minimal) */
+.card-clean.goal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.card-clean.goal h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* IMAGES */
+.case-image {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.caption {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 8px;
+}
+
+.case-section {
+  background: #d9dfdd;
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== TABS BAR ===== */
+.ux-tabs {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  border: 2px solid #222;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #c6dcff ;
+  margin-bottom: 50px;
+}
+
+/* ===== INDIVIDUAL TAB ===== */
+.ux-tab {
+  flex: 1;
+  background: #cfe2ff !important;      /* non-active bg */
+  color: #1e293b !important;           /* non-active text */
+  border: none !important;
+  border-right: 2px solid #222 !important;
+  padding: 8px 14px !important;
+  min-height: 48px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  outline: none !important;
+  box-shadow: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0 !important;
+}
+
+.ux-tab:last-child {
+  border-right: none !important;
+}
+
+/* ===== ACTIVE TAB ===== */
+.ux-tab.active {
+  background: #032b6d !important;      /* active bg */
+  color: #ffffff !important;           /* active text */
+}
+
+/* ===== HOVER TAB ===== */
+.ux-tab:hover:not(.active) {
+  background: #eaf2ff !important;      /* hover bg */
+  color: #1e293b !important;           /* hover text */
+}
+
+/* REMOVE BLUE FOCUS OUTLINE */
+.ux-tab:focus,
+.ux-tab:focus-visible,
+.ux-tab:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== CONTENT PANELS ===== */
+.ux-panel {
+  display: none;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.ux-panel.active {
+  display: grid;
+}
+
+.ux-text h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #2f2f2f;
+}
+
+.ux-text p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: #333333;
+}
+
+.ux-text h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  color: #2f2f2f;
+}
+
+.ux-text ul {
+  margin: 0 0 24px 22px;
+  padding-left: 12px;
+}
+
+.ux-text li {
+  font-size: 17px;
+  line-height: 1.65;
+  margin-bottom: 6px;
+  color: #333333;
+}
+
+.ux-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  object-fit: contain;
+  background: #fff;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 991px) {
+  .ux-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .ux-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ux-tab {
+    flex: 0 0 auto;
+    min-width: 180px;
+  }
+
+  .ux-panel.active {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .ux-tab {
+    font-size: 15px !important;
+    min-height: 58px !important;
+    padding: 12px 16px !important;
+    min-width: 160px;
+  }
+
+  .ux-text h2 {
+    font-size: 28px;
+  }
+
+  .ux-text p,
+  .ux-text li {
+    font-size: 16px;
+  }
+
+  .ux-text h4 {
+    font-size: 18px;
+  }
+}
+
+/* Match your other sections */
+.case-section {
+  padding: 80px 0;
+}
+
+/* Title style same as Content Inventory */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.section-intro {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #666;
+}
+
+/* Fix oversized numbers */
+.wireframe-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+/* Reduce text heaviness */
+.wireframes-section h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Section spacing consistency */
+.case-section {
+  padding: 80px 0;
+}
+
+/* Title + intro */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.section-intro {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #666;
+}
+
+/* Carousel spacing */
+.carousel-item {
+  padding: 10px 40px;
+}
+
+/* Image sizing */
+.carousel img {
+  max-height: 420px;
+  object-fit: contain;
+}
+
+/* Caption styling */
+.ui-caption {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* Make carousel arrows visible */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  padding: 20px;
+}
+
+/* Ensure arrows are clickable */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* TEXT STYLE (same as Problem) */
+.section-text {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.section-text li {
+  margin-bottom: 10px;
+}
+
+/* OUTCOME - soft green */
+.outcome-section {
+  background-color: #ffffff; /* soft green like your design */
+}
+
+/* REFLECTION - light gray */
+.reflection-section {
+  background-color: #ffffff;
+  padding-bottom: 80px; /* reduce bottom spacing */
+}
+
+.reflection-section p {
+  margin-bottom: 0;
+}
+
+.section-text {
+  margin-top: 10px;
+}
+
+ /* ===== FOOTER ===== */
+.footer {
+ margin-top: 0;   /* FIX */
+  padding: 80px 20px;
+  background: #111827;
+  color: #fff;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.5fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* NAME */
+.footer-left {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* COLUMNS */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-title {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+/* LINKS */
+.footer-column a {
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.footer-column a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #9381ff;
+  transition: width 0.35s ease;
+}
+
+.footer-column a:hover {
+  color: #9381ff;
+}
+
+.footer-column a:hover::after {
+  width: 30%;
+}
+
+/* CTA */
+.footer-cta h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-cta p {
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* BUTTON */
+.footer-btn {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-btn:hover {
+  background: #fff;
+  color: #111827;
+  transform: translateY(-3px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+</style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+   <a href="index.html" class="navbar-brand fw-semibold">
+  <img src="logo.png" alt="Logo" height="44">
+</a>
+   <a href="work.html" class="btn btn-outline-dark rounded-pill px-3">Back to Work</a>
+  </div>
+</nav>
+
+<section class="hero-clean">
+  <div class="container">
+
+    <!-- TITLE -->
+    <h1 class="hero-title">FAFSA</h1>
+    <p class="hero-sub">UX Case Study ✦ 2025</p>
+
+    <div class="hero-grid">
+
+      <!-- LEFT -->
+      <div class="hero-left">
+
+        <div class="meta-block">
+          <span>ROLE</span>
+          <p>UX Researcher & UI/UX Designer</p>
+        </div>
+
+        <div class="meta-block">
+          <span>TIMELINE</span>
+          <p>2 Weeks</p>
+        </div>
+
+        <div class="meta-block">
+          <span>TOOLS</span>
+          <p>Figma, UXtweak</p>
+        </div>
+
+        <div class="meta-block">
+          <span>FOCUS</span>
+          <p>UX Research, Interaction Design</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="hero-right">
+
+        <div class="content-block">
+          <h3>Project Overview</h3>
+          <p>
+            The FAFSA application process is often overwhelming due to complex language, long forms, and lack of guidance.
+            This project focuses on redesigning the experience into a structured, step-by-step flow that reduces confusion
+            and helps students complete the process with confidence.
+          </p>
+        </div>
+
+        <div class="content-block">
+          <h3>Impact</h3>
+          <p>
+            Simplified navigation, reduced cognitive load, and improved clarity across key steps, making the application
+            more accessible and easier to complete.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="case-section">
+  <div class="container">
+    <h2 class="section-title">Problem</h2>
+    <p>
+      Students struggle to complete the FAFSA application due to complex language, long forms, and lack of guidance.
+      This results in confusion, errors, and drop-offs, impacting access to financial aid.
+    </p>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="container">
+    <h2 class="section-title text-center">Research & Insights</h2>
+
+    <div class="row mt-5 g-4">
+
+      <div class="col-md-3">
+        <div class="card-clean">
+          <h4>Overwhelming</h4>
+          <p>Too much information presented at once</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean">
+          <h4>Confusing Terms</h4>
+          <p>Financial jargon unclear to users</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean">
+          <h4>Error Anxiety</h4>
+          <p>Fear of making mistakes during application</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean">
+          <h4>No Guidance</h4>
+          <p>Users unsure what to do next</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="container text-center">
+    <h2 class="section-title">Design Goals</h2>
+
+    <div class="row mt-5 g-4">
+
+      <div class="col-md-3">
+        <div class="card-clean goal">
+          <h4>Simplify Navigation</h4>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean goal">
+          <h4>Reduce Cognitive Load</h4>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean goal">
+          <h4>Increase Confidence</h4>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card-clean goal">
+          <h4>Improve Completion</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="container">
+
+    <!-- NEW HEADING -->
+    <div class="text-center mb-5">
+      <h2 class="section-title">From Complexity → Guided Experience</h2>
+      <p class="section-intro">
+        I redesigned the FAFSA experience into a structured, step-by-step flow that guides users from start to completion.
+      </p>
+    </div>
+
+    <!-- TAB BUTTONS -->
+    <div class="ux-tabs">
+      <button class="ux-tab active" data-tab="inventory">Content Inventory</button>
+      <button class="ux-tab" data-tab="audit">Content Audit</button>
+      <button class="ux-tab" data-tab="sorting">Card Sorting</button>
+      <button class="ux-tab" data-tab="tree">Tree Testing</button>
+      <button class="ux-tab" data-tab="sitemap">Sitemap</button>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="ux-tab-content">
+
+      <div class="ux-panel active" id="inventory">
+        <div class="ux-text">
+          <h2>Content Inventory</h2>
+          <p>
+            I conducted a content inventory to map all existing FAFSA pages and understand the overall scope.
+          </p>
+
+          <h4>What I Did:</h4>
+          <ul>
+            <li>Reviewed all major FAFSA sections</li>
+            <li>Documented content structure and complexity</li>
+            <li>Identified duplicate and outdated content</li>
+          </ul>
+
+          <h4>Key Findings:</h4>
+          <ul>
+            <li>Overlapping content across sections</li>
+            <li>Lack of clear hierarchy</li>
+            <li>Information overload for users</li>
+          </ul>
+
+          <p><strong>Outcome:</strong> Established a foundation for simplifying and restructuring content.</p>
+        </div>
+
+        <div class="ux-image">
+          <img src="landingpage.png" alt="Content Inventory">
+        </div>
+      </div>
+
+      <div class="ux-panel" id="audit">
+        <div class="ux-text">
+          <h2>Content Audit</h2>
+          <p>
+            I conducted a content audit to evaluate clarity, consistency, and usability of FAFSA content.
+          </p>
+
+          <h4>What I Did:</h4>
+          <ul>
+            <li>Analyzed readability and clarity</li>
+              <li>Reviewed terminology consistency</li>
+              <li>Identified redundant content</li>
+          </ul>
+
+          <h4>Key Findings:</h4>
+          <ul>
+            <li>Complex financial language reduced understanding</li>
+              <li>Inconsistent labels across pages</li>
+              <li>Duplicate content increased confusion</li>
+          </ul>
+
+          <p><strong>Outcome:</strong> Simplified language and improved clarity across the experience.</p>
+        </div>
+        <div class="ux-image">
+          <img src="content audit.png" alt="Content Audit">
+        </div>
+      </div>
+
+      <div class="ux-panel" id="sorting">
+        <div class="ux-text">
+          <h2>Card Sorting</h2>
+          <p>
+           I conducted a hybrid card sorting study using UXtweak to understand user mental models.
+          </p>
+
+          <h4>What I Did:</h4>
+          <ul>
+             <li>Users grouped content into categories</li>
+              <li>Allowed custom labels</li>
+              <li>Analyzed grouping patterns</li>
+          </ul>
+
+          <h4>Key Findings:</h4>
+          <ul>
+            <li>Grants and Loans grouped together</li>
+              <li>Users created their own labels</li>
+              <li>Loan terminology caused confusion</li>
+          </ul>
+
+          <p><strong>Outcome:</strong> Improved navigation labels and content grouping.</p>
+        </div>
+        <div class="ux-image">
+          <img src="cardsortting.png" alt="Card Sorting">
+        </div>
+      </div>
+
+      <div class="ux-panel" id="tree">
+        <div class="ux-text">
+          <h2>Tree Testing</h2>
+          <p>
+           I conducted tree testing to validate the proposed sitemap.
+          </p>
+
+          <h4>What I Did:</h4>
+          <ul>
+            <li>Created task-based navigation scenarios</li>
+              <li>Tested user success rates</li>
+              <li>Analyzed navigation paths</li>
+          </ul>
+
+          <h4>Key Findings:</h4>
+          <ul>
+            <li>Users found key sections quickly</li>
+              <li>Some confusion in grants navigation</li>
+              <li>Users preferred simpler paths</li>
+          </ul>
+
+          <p><strong>Outcome:</strong> Refined sitemap to improve navigation efficiency.</p>
+        </div>
+        <div class="ux-image">
+          <img src="treetesting.png" alt="Tree Testing">
+        </div>
+      </div>
+
+      <div class="ux-panel" id="sitemap">
+        <div class="ux-text">
+          <h2>Sitemap</h2>
+          <p>
+            Based on all research insights, I designed a simplified sitemap.
+          </p>
+
+          <h4>What I Did:</h4>
+          <ul>
+           <li>Grouped content based on user behavior</li>
+              <li>Simplified navigation structure</li>
+              <li>Reduced unnecessary steps</li>
+          </ul>
+
+          <h4>Key Findings:</h4>
+          <ul>
+             <li>Users needed clearer navigation paths to find information faster</li>
+      <li>The original structure lacked a strong hierarchy across key sections</li>
+      <li>Reducing content layers helped lower cognitive load during the application journey</li>
+    </ul>
+          </ul>
+
+          <p><strong>Outcome:</strong> The final sitemap created a more intuitive structure, improved discoverability, and established a stronger foundation for a streamlined FAFSA user journey.
+    </p>
+        </div>
+        <div class="ux-image">
+          <img src="sitemap.png" alt="Sitemap">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= WIREFRAMES ================= -->
+<section class="case-section">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h2 class="section-title">Wireframes & Storyflow</h2>
+      <p class="section-intro">
+        Designed a step-by-step guided experience from low-fidelity sketches to high-fidelity flows.
+      </p>
+    </div>
+
+    <!-- 1 -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <p class="wireframe-number">01</p>
+        <h4>Clear Starting Point</h4>
+        <p>
+          A simplified entry point helps users immediately understand where to begin without confusion.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe1.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="row align-items-center mb-5 flex-md-row-reverse">
+      <div class="col-md-6">
+        <p class="wireframe-number">02</p>
+        <h4>Guided Application Entry</h4>
+        <p>
+          Users are guided into the application with clear actions, reducing hesitation and uncertainty.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe2.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <p class="wireframe-number">03</p>
+        <h4>Pre-Application Checklist</h4>
+        <p>
+          A checklist prepares users before they begin, helping prevent mistakes and missing information.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe3.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="row align-items-center mb-5 flex-md-row-reverse">
+      <div class="col-md-6">
+        <p class="wireframe-number">04</p>
+        <h4>Step-by-Step Guidance</h4>
+        <p>
+          The form is broken into manageable steps with clear instructions to reduce cognitive overload.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe4.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <p class="wireframe-number">05</p>
+        <h4>Progress & Timeline</h4>
+        <p>
+          A timeline helps users track progress and understand what comes next in the application.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe5.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="row align-items-center flex-md-row-reverse">
+      <div class="col-md-6">
+        <p class="wireframe-number">06</p>
+        <h4>Login / Account Access</h4>
+        <p>
+          Users can easily log in or create an account to save and continue their progress.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="wireframe6.png" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FINAL UI ================= -->
+<section class="case-section text-center">
+  <div class="container">
+
+    <h2 class="section-title">Final UI</h2>
+
+    <p class="section-intro mb-5">
+      Clean layout, strong hierarchy, and micro-interactions like progress tracking improve usability.
+    </p>
+
+    <!-- Carousel -->
+    <div id="uiCarousel" class="carousel slide" data-bs-ride="carousel">
+
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img src="p1.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">1. Entry Point & Navigation</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="p2.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">2. Application Initiation</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img src="p3.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">3. Pre-Application Checklist</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="p4.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">4. Guided Form Experience</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img src="p5.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">5. Progress & Timeline Tracking</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="p6.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">6. Authentication Flow</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img src="p7.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">7. Account Creation</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="p8.png" class="img-fluid rounded shadow-sm" alt="">
+              <p class="ui-caption">8. Account Recovery</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#uiCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#uiCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="case-section outcome-section">
+  <div class="container">
+    <h2 class="section-title">Outcome</h2>
+    <ul class="section-text">
+      <li><strong>Reduced Cognitive Load:</strong> Simplified steps and intuitive flow made the application easier to complete.</li>
+      <li><strong>Increased Completion Confidence:</strong> Users felt guided and supported throughout the process.</li>
+      <li><strong>Improved Clarity:</strong> Clear labeling, instructions, and hierarchy reduced confusion and errors.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section class="case-section reflection-section">
+  <div class="container">
+    <h2 class="section-title">Reflection</h2>
+    <p class="section-text">
+      This project reinforced the importance of structured flows and clear guidance. I learned that even small improvements in labeling, sequencing, and feedback can significantly enhance usability and user confidence. Moving forward, I would explore additional micro-interactions and personalized cues to further support users.
+    </p>
+  </div>
+</section>
+
+<!-- PREMIUM FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+
+    <!-- NAME -->
+    <div class="footer-left">
+      Divya Manjunathan
+    </div>
+
+    <!-- SITE -->
+    <div class="footer-column">
+      <div class="footer-title">Site</div>
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="footer-column">
+      <div class="footer-title">Social</div>
+      <a href="mailto:divyamanjunathan04@email.com">Email</a>
+      <a href="#">LinkedIn</a>
+    </div>
+
+    <!-- CONTACT CTA -->
+    <div class="footer-cta">
+      <div class="footer-title">Connect</div>
+      <h3>Let’s work together</h3>
+      <p>Have a project, opportunity, or just want to connect?</p>
+      <a href="mailto:divyamanjunathan04@email.com" class="footer-btn">Contact Me</a>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const uxTabs = document.querySelectorAll('.ux-tab');
+  const uxPanels = document.querySelectorAll('.ux-panel');
+
+  uxTabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+      const target = this.getAttribute('data-tab');
+
+      uxTabs.forEach(t => t.classList.remove('active'));
+      uxPanels.forEach(panel => panel.classList.remove('active'));
+
+      this.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
